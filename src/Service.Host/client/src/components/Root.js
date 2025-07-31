@@ -2,6 +2,8 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 // import useSignIn from '../hooks/useSignIn';
 import App from './App';
+import AuthGate from './AuthGate';
+import LoggedOut from './LoggedOut';
 // import 'typeface-roboto';
 
 function Root() {
@@ -10,7 +12,15 @@ function Root() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/portal" replace />} />
-            <Route path="/portal" element={<App />} />
+            <Route
+                path="/portal"
+                element={
+                    <AuthGate>
+                        <App />
+                    </AuthGate>
+                }
+            />
+            <Route path="/portal/logged-out/" element={<LoggedOut />} />
         </Routes>
     );
 }
