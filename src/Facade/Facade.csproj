@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<AssemblyName>Linn.Portal.Facade</AssemblyName>
+		<RootNamespace>Linn.Portal.Facade</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Linn.Common.Logging" Version="2.0.0" />
+		<PackageReference Include="Linn.Common.Proxy.LinnApps" Version="4.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Proxy\Proxy.csproj" />
+		<ProjectReference Include="..\Resources\Resources.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ResourceBuilders\" />
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
+</Project>
