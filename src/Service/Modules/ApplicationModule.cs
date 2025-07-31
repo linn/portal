@@ -17,6 +17,8 @@
         {
             app.MapGet("/", this.Redirect);
             app.MapGet("/portal", this.GetApp);
+            app.MapGet("/portal/protected", this.GetProtected);
+
         }
 
         private Task Redirect(HttpRequest req, HttpResponse res)
@@ -28,6 +30,14 @@
         private async Task GetApp(HttpRequest req, HttpResponse res)
         {
             await res.Negotiate(new ViewResponse { ViewName = "Index.cshtml" });
+        }
+        
+        private async Task GetProtected(HttpRequest req, HttpResponse res)
+        {
+            var user = req.HttpContext.User;
+            res.StatusCode = 200;
+            res.ContentType = "application/json";
+            await res.WriteAsync("{\"message\":\"Success\"}");
         }
     }
 }
