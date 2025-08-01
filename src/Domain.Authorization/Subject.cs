@@ -10,20 +10,14 @@
 
         public bool HasPermissionFor(Privilege privilege, Uri resource)
         {
-            if (this.Associations
-                    .FirstOrDefault(x => x.AssociatedResource == resource) == null)
-            {
-                return false;
-            }
+            var hasAssociation = this.Associations.Any(a => a.AssociatedResource == resource);
+            var hasPrivilege = this.Permissions.Any(p =>
+                p.IsActive &&
+                p.Privilege.IsActive &&
+                p.Privilege.Action == privilege.Action);
 
-            if (this.Permissions.Any(x => x.IsActive 
-                                          && x.Privilege.Action == privilege.Action 
-                                          && x.Privilege.IsActive))
-            {
-                return true;
-            }
-            
-            return false;
+            return hasAssociation && hasPrivilege;
         }
+
     }
 }
