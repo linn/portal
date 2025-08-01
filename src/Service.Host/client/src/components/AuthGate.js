@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from 'react-oidc-context';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -7,6 +7,13 @@ import { signOut } from '../helpers/authUtils';
 
 export default function AuthGate({ children }) {
     const auth = useAuth();
+
+    useEffect(() => {
+        if (auth.isAuthenticated && window.location.search.includes('code=')) {
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
+    }, [auth.isAuthenticated]);
 
     if (!auth.isAuthenticated) {
         return (
