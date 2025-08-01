@@ -8,13 +8,13 @@
         
         public ICollection<Permission> Permissions { get; set; }
 
-        public bool HasPermissionFor(Privilege privilege, Uri resource)
+        public bool HasPermissionFor(string privilege, Uri resource)
         {
-            var hasAssociation = this.Associations.Any(a => a.AssociatedResource == resource);
+            var hasAssociation = this.Associations.Any(a => a.AssociatedResource.AbsoluteUri == resource.AbsoluteUri);
             var hasPrivilege = this.Permissions.Any(p =>
                 p.IsActive &&
                 p.Privilege.IsActive &&
-                p.Privilege.Action == privilege.Action);
+                p.Privilege.Action == privilege);
 
             return hasAssociation && hasPrivilege;
         }

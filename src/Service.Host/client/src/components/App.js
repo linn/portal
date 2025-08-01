@@ -7,11 +7,11 @@ import useGet from '../hooks/useGet';
 function App() {
     const auth = useAuth();
 
-    const { send } = useGet('http://localhost:5050/portal/protected', true);
+    const { send } = useGet('http://localhost:5050/portal/api/invoices', true);
     const [hasSent, setHasSent] = useState(false);
 
     if (auth.isAuthenticated && !hasSent) {
-        send();
+        send(1);
         setHasSent(true);
     }
 

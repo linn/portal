@@ -116,9 +116,7 @@ namespace Linn.Portal.Service.Host
 
             app.UseRouting();
             app.UseAuthorization();
-
-            app.UseEndpoints(builder => { builder.MapEndpoints(); });
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapEndpoints();

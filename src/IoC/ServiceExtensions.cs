@@ -2,7 +2,7 @@
 {
     using Linn.Common.Facade;
     using Linn.Common.Rendering;
-   
+    using Linn.Portal.Facade.Services;
 
     using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +12,7 @@
     {
         public static IServiceCollection AddFacadeServices(this IServiceCollection services)
         {
-            return services;
+            return services.AddScoped<IInvoiceService, InvoiceService>();
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)

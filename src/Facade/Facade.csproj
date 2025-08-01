@@ -7,18 +7,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Linn.Common.Facade" Version="12.0.0" />
 		<PackageReference Include="Linn.Common.Logging" Version="2.0.0" />
 		<PackageReference Include="Linn.Common.Proxy.LinnApps" Version="4.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Domain.Authorization\Domain.Authorization.csproj" />
+		<ProjectReference Include="..\Persistence.Authorization\Persistence.Authorization.csproj" />
 		<ProjectReference Include="..\Proxy\Proxy.csproj" />
 		<ProjectReference Include="..\Resources\Resources.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="ResourceBuilders\" />
-	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

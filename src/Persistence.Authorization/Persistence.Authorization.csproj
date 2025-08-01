@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <AssemblyName>Linn.Portal.Persistence.Authorization</AssemblyName>
+        <RootNamespace>Linn.Portal.Persistence.Authorization</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain.Authorization\Domain.Authorization.csproj" />
+    </ItemGroup>
+
+</Project>

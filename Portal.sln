@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.Tests", "tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Authorization", "src\Domain.Authorization\Domain.Authorization.csproj", "{18AD7573-7B0E-4349-8C13-20213DBA705E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Authorization", "src\Persistence.Authorization\Persistence.Authorization.csproj", "{F5F6CBC8-B1E3-4227-854D-3A85399D2EE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{18AD7573-7B0E-4349-8C13-20213DBA705E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18AD7573-7B0E-4349-8C13-20213DBA705E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18AD7573-7B0E-4349-8C13-20213DBA705E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5F6CBC8-B1E3-4227-854D-3A85399D2EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F6CBC8-B1E3-4227-854D-3A85399D2EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F6CBC8-B1E3-4227-854D-3A85399D2EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F6CBC8-B1E3-4227-854D-3A85399D2EE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
