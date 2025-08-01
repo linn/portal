@@ -19,7 +19,7 @@ export default function AuthGate({ children }) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                 <Button variant="contained" onClick={() => auth.signinRedirect()}>
-                    Sign In / Create Account
+                    Sign In
                 </Button>
             </Box>
         );

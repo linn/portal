@@ -1,5 +1,6 @@
 ﻿namespace Linn.Portal.Service.Modules
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Linn.Common.Service.Core;
@@ -35,9 +36,21 @@
         private async Task GetProtected(HttpRequest req, HttpResponse res)
         {
             var user = req.HttpContext.User;
-            res.StatusCode = 200;
-            res.ContentType = "application/json";
-            await res.WriteAsync("{\"message\":\"Success\"}");
+            if (user?.Identity?.IsAuthenticated == true)
+            {
+                await req.HttpContext.Response.WriteAsJsonAsync(new
+                                                            {
+                                                                message = "User is authenticated",
+
+                                                                username = user.Identity.Name,
+                                                                claims = user.Claims.ToList().Select(c => new { c.Type, c.Value })
+                                                            });
+            }
+            else
+            {
+                req.HttpContext.Response.StatusCode = 401;
+                await req.HttpContext.Response.WriteAsync("Not authenticated");
+            }
         }
     }
 }

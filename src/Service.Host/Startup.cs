@@ -1,28 +1,25 @@
-using System.IO;
-using Linn.Common.Logging;
-using Linn.Common.Service.Core;
-using Linn.Common.Service.Core.Extensions;
-using Linn.Portal.IoC;
-// using Linn.Portal.Service;
-using Linn.Portal.Service.Host.Negotiators;
-using Linn.Service.IoC;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-
 namespace Linn.Portal.Service.Host
 {
-    using System.Linq;
+    using System.IO;
 
+    using Linn.Common.Logging;
+    using Linn.Common.Service.Core;
+    using Linn.Common.Service.Core.Extensions;
+    using Linn.Portal.IoC;
+    using Linn.Portal.Service.Host.Negotiators;
     using Linn.Portal.Service.Models;
+    using Linn.Service.IoC;
 
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Diagnostics;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.FileProviders;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.IdentityModel.JsonWebTokens;
+    using Microsoft.IdentityModel.Tokens;
 
     public class Startup
     {
@@ -30,7 +27,6 @@ namespace Linn.Portal.Service.Host
         {
             JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
             
-            var x = ApplicationSettings.Get();
 
             services.AddCors();
             services.AddSingleton<IViewLoader, ViewLoader>();
@@ -46,7 +42,9 @@ namespace Linn.Portal.Service.Host
             services.AddBuilders();
             services.AddHandlers();
 
-            // Ensure your configuration or settings class gives this info properly
+            var x = ApplicationSettings.Get();
+
+            // todo - use above settings to get the below info properly
             var authority = "https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_HL1uFEa5R";
             var audience = "64fbgrkkslt1choig1e8km1g45";
 
@@ -117,33 +115,13 @@ namespace Linn.Portal.Service.Host
             }));
 
             app.UseRouting();
-            app.UseAuthorization(); // <-- Must add this
+            app.UseAuthorization();
+
+            app.UseEndpoints(builder => { builder.MapEndpoints(); });
 
             app.UseEndpoints(endpoints =>
             {
-                // Map your normal endpoints
                 endpoints.MapEndpoints();
-
-                // Example test endpoint to verify user authentication:
-                endpoints.MapGet("/protected", async context =>
-                {
-                    var user = context.User;
-                    if (user?.Identity?.IsAuthenticated == true)
-                    {
-                        await context.Response.WriteAsJsonAsync(new
-                        {
-                            message = "User is authenticated",
-                            
-                            username = user.Identity.Name,
-                            claims = user.Claims.ToList().Select(c => new { c.Type, c.Value })
-                        });
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 401;
-                        await context.Response.WriteAsync("Not authenticated");
-                    }
-                });
             });
         }
     }
