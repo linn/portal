@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public string Privilege { get; set; }
+        public Privilege Privilege { get; set; }
 
         public Subject Subject { get; set; }
 
